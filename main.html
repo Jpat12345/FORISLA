@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALLERY</title>
+    <style>
+        :root {
+            --bg-color: #f3e5f5;
+            --accent-purple: #9c27b0;
+            --envelope-color: #ba68c8;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #open-mail-btn {
+            position: fixed;
+            top: 20px;
+            z-index: 100;
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+        }
+
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 0 10%;
+            width: 100%;
+            height: 80vh;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+
+        .gallery-container::-webkit-scrollbar { display: none; }
+
+        .card {
+            flex: 0 0 80vw;
+            height: 60vh;
+            background: white;
+            border-radius: 25px;
+            scroll-snap-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) { .card { flex: 0 0 350px; } }
+
+        .card img { width: 100%; height: 70%; object-fit: cover; pointer-events: none;}
+        .card-content { padding: 15px; text-align: center; color: var(--accent-purple); }
+
+        #envelope-scene {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-color);
+            z-index: 200;
+        }
+
+        .envelope {
+            width: 180px;
+            height: 120px;
+            background: var(--envelope-color);
+            position: relative;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .letter {
+            position: absolute;
+            width: 240px;
+            height: auto;
+            min-height: 200px;
+            max-width: 80vw;
+            max-height: 70vh;   /* added */
+            overflow-y: auto;   /* added */
+            background: white;
+            padding: 25px;
+            box-sizing: border-box;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            color: #333;
+            opacity: 0;
+            transform: scale(0) translateY(50px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            z-index: 210;
+        }
+
+        .letter.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: all;
+        }
+
+        .controls { position: fixed; bottom: 20px; right: 20px; }
+        .btn-circle { width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--accent-purple); color: white; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <button id="open-mail-btn">Open Mail ✉️</button>
+
+    <div class="gallery-container" id="gallery">
+        <div class="card"><img src="IMG_8478.JPG"><div class="card-content"><h4>nag try2 og outfits pang hike mura jd tag naay kwarta HAHAHAHA, wa pa nato mabalik ang hats </h4></div></div>
+        <div class="card"><img src="att.6lT3-66DpP4TdBOiNvuAQEAZo3hYhQEfaOPffk35xhk.jpg"><div class="card-content"><h4>heh ka remember pako ani ikaw ni wait huhu, dugay kaayo ga buy dy tog flowers hehe, watch dayun conjuring, hapit ko maka sleep HAHAHAHAHA nya ni syagit sa cine huhu</h4></div></div>
+        <div class="card"><img src="att.obmDb7mtn8iPtMxsXVp8qIUAwVZCq1fYb0b-AEFrm9w.jpg"><div class="card-content"><h4>after donation, nag tambay nalang kay wa ka volunteer. ka remember pakas COLA?? HAHAHAHAHHA grabe raba kayka laugh ato. di jd ko kalimot ato</h4></div></div>
+        <div class="card"><img src="IMG_0607.JPG"><div class="card-content"><h4>vlogger man kaayo ta ari ohh HAHAHAHAHA, wa najud ta kabalik sm ba, random day kaayo lakaw2 ras sm</h4></div></div>
+        <div class="card"><img src="IMG_0718.PNG"><div class="card-content"><h4>jog date hehe, its been a while na wala ta kaadtog abellana huhu, wala mn say time but run mn nya ta puhon hehe</h4></div></div>
+        <div class="card"><img src="IMG_0871.PNG"><div class="card-content"><h4>fav spot nato sauna ohh HAHAHAHHA, sb sa sm nya manghimantay sa mga guwang na judgemental. gisagpa pako nimo diri sauna</h4></div></div>
+        <div class="card"><img src="IMG_4348.PNG"><div class="card-content"><h4>first visit nako sa inyo hehe, awkward pa kaayo to di pa anad HAHAHAHAHA, family picture dayun with muji and mochi hehe, and naa pay lain nahitabo huhu</h4></div></div>
+        <div class="card"><img src="IMG_4368.PNG"><div class="card-content"><h4>patts and putts date HAHAHAHA, siaw raba kayta ari di jd na makalimtan ni gawas pagka competitive uy, di ganahan mapildi mura bag naay cash prize HAHAHAHAHA, cute</h4></div></div>
+        <div class="card"><img src="IMG_5178.JPG"><div class="card-content"><h4>AKONG HAIR HAHAHHAHAHA, grabe raba kaykag bugal2 ana nohh HAHAHAHAHA, exchange gift natos something useful, naghinuwatay pajud kay di ka chat kay way load huhu</h4></div></div>
+    </div>
+
+    <div id="envelope-scene">
+        <div class="envelope" id="main-envelope">
+            ✉️
+            <div class="letter" id="the-letter">
+                <h3 style="color: var(--accent-purple); margin-top:0;">LETTER FOR MY BABY</h3>
+                <p style="font-size: 14px;">I was supposed to give this to you inig april 29 paman unta, but di man nako ma hold gd hehe. 2 days from now 9 months nata ga talk, mura jug monthsary ba huhu, but yeah 9 months na. In those 9 months, a lot of things happened, joyful, sadness, disgust, anger, fear, ennui, embarrassment, char HAHAHAHAHAHA. But really tho daghan nag na happen, happy days, sad days, kulba days, and many more days. Well first off all, i really want to apologize baby, for everything that has happened recently. Ik its too much for you to take jd, and i hope this website(?)  i created and this letter i wrote will help you or us somehow. I just wanna say that you are the only woman i want, and will ever want in my life, wala nay lain pa baby okay?? You are so pretty, not just sa akong eyes, but in everyone’s eyes, hehe. I hope you believe it when i say that YOU ARE VERY PRETTY, because its true baby YOU ARE VERY PRETTY. OA kaayo sa caps uy HAHAHAHAHA. But if di ka mu tuo when i say it, dapat mu tuo ka char. Im sorry if i made you insecure baby, i didnt want that to happen jd, and i am deeply sorry for that. Baby dont be insecure okay?? Sayon sya iingon sa akoa but ik its hard sa imoha pero baby there’s no reason to be insecure cause you are the only woman that i talk to, and you are the only woman that i want hehe. I also want to say thank you for giving me lots of chances, even after you saw my flaws, a lot of flaws. Ka remember pako nimo sauna mu ingon ka nga perfect ko huhu, now yk na im not jd, and even after you saw my flaws, you still stayed. I am very happy and grateful for that, i love you so much baby. Di ko artistic na person kaybaw jd ka ana huhu, so simple ra kaayo ni na website hehe. I simply created this cause i wanna show you how grateful i am to have you sa akong life jd baby, you mean so much to me. You mean everything to me, my baby. I LOVE YOU SO MUCH, MWAAAA. Forever baby </p>
+                <button onclick="location.reload()" style="margin-top: 15px; cursor: pointer; background: var(--accent-purple); color: white; border: none; padding: 8px 16px; border-radius: 5px;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-circle" id="music-toggle">⏸️</button>
+    </div>
+
+    <audio id="bg-music" autoplay loop>
+        <source src="bgmusic.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const mailBtn = document.getElementById('open-mail-btn');
+        const gallery = document.getElementById('gallery');
+        const envelopeScene = document.getElementById('envelope-scene');
+        const envelope = document.getElementById('main-envelope');
+        const letter = document.getElementById('the-letter');
+
+        mailBtn.addEventListener('click', () => {
+            gallery.style.opacity = '0';
+            mailBtn.style.opacity = '0';
+            setTimeout(() => {
+                gallery.style.display = 'none';
+                mailBtn.style.display = 'none';
+                envelopeScene.style.display = 'flex';
+            }, 500);
+        });
+
+        envelope.addEventListener('click', (e) => {
+            if(e.target === envelope || e.target.textContent === '✉️') {
+                letter.classList.add('show');
+            }
+        });
+
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+
+        window.addEventListener("load", () => {
+            music.play().then(() => {
+                musicBtn.textContent = '⏸️';
+            }).catch(() => {
+                musicBtn.textContent = '🎵';
+            });
+        });
+
+        musicBtn.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                musicBtn.textContent = '⏸️';
+            } else {
+                music.pause();
+                musicBtn.textContent = '🎵';
+            }
+        });
+
+        let isDown = false; let startX; let scrollLeft;
+        gallery.addEventListener('mousedown', (e) => {
+            isDown = true; startX = e.pageX - gallery.offsetLeft; scrollLeft = gallery.scrollLeft;
+            gallery.style.scrollSnapType = 'none';
+        });
+        gallery.addEventListener('mouseup', () => { isDown = false; gallery.style.scrollSnapType = 'x mandatory'; });
+        gallery.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            const x = e.pageX - gallery.offsetLeft;
+            gallery.scrollLeft = scrollLeft - (x - startX) * 2;
+        });
+    </script>
+</body>
+</html>
